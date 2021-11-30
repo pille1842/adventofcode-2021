@@ -5,6 +5,10 @@ use Commando\Command;
 
 require_once 'vendor/autoload.php';
 
+if (php_sapi_name() !== "cli") {
+    die("This script is intended for use on the command-line interface.");
+}
+
 $puzzles = [
     'day01' => false,
     'day02' => false,
@@ -54,13 +58,23 @@ $solveCmd->option()
 
 if ($solveCmd[0]) {
     $puzzle = $solveCmd[0];
-    echo $puzzle->readInput()->solve() . PHP_EOL;
+    try {
+        echo $puzzle->readInput()->solve() . PHP_EOL;
+    } catch (Exception $e) {
+        $color = new \Colors\Color();
+        $error = $color("An error occurred while solving the puzzle:")->white()->bg('red')->bold();
+        $error .= ' ' . $e->getMessage();
+        fwrite(STDERR, $error . PHP_EOL);
+    }
 } else {
-    echo "List of puzzles" . PHP_EOL . "---------------" . PHP_EOL . PHP_EOL;
+    $color = new \Colors\Color();
+    echo $color(\Commando\Util\Terminal::header(' List of puzzles'))
+            ->white()->bg('green')->bold() . PHP_EOL . PHP_EOL;
     foreach ($puzzles as $puzzleName => $puzzleClass) {
-        echo $puzzleName;
+        echo $puzzleName . " ";
         if ($puzzleClass === false) {
-            echo " (not implemented yet)";
+            $color = new \Colors\Color();
+            echo $color("(not implemented yet)")->black()->bg('yellow')->bold();
         }
         echo PHP_EOL;
     }
