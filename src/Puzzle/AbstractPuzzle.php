@@ -11,6 +11,13 @@ abstract class AbstractPuzzle implements PuzzleInterface
 
     public function readInput(): self
     {
+        if (!isset($this->inputFilename)) {
+            throw new Exception(
+                "No input file name specified on puzzle class. Override \$inputFilename " .
+                "and set a valid filename in the input/ directory."
+            );
+        }
+
         $localFilename = dirname(__FILE__) .
             DIRECTORY_SEPARATOR .
             '..' .
