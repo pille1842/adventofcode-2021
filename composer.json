@@ -1,0 +1,21 @@
+{
+    "name": "pille1842/adventofcode-2021",
+    "description": "Advent of Code 2021",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eric Haberstroh",
+            "email": "gpg@erixpage.de"
+        }
+    ],
+    "require": {
+        "nategood/commando": "^0.4.0",
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "PilleAoc2021\\": "src/"
+        }
+    }
+}

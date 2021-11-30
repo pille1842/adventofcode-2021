@@ -1,0 +1,1 @@
+This puzzle just serves as an example to demonstrate how to implement a puzzle class.
