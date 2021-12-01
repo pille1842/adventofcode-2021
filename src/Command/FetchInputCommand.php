@@ -50,7 +50,13 @@ final class FetchInputCommand extends AbstractCommand
             }
 
             if (file_exists($absolutePath)) {
-                throw new \Exception("The input for this day has already been downloaded.");
+                $output->writeln(
+                    sprintf(
+                        "Input for this day has already been downloaded in %s, not downloading again",
+                        realpath($absolutePath)
+                    )
+                );
+                return Command::SUCCESS;
             }
 
             $curl = curl_init();

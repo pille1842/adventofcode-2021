@@ -1,0 +1,13 @@
+<?php
+
+namespace PilleAoc2021\Puzzle;
+
+final class %%CLASS_NAME%% extends AbstractPuzzle implements PuzzleInterface
+{
+    public static string $puzzleName = '%%PUZZLE_NAME%%';
+
+    public function solve(): string
+    {
+        // Access input via $this->input
+    }
+}
