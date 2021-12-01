@@ -2,6 +2,7 @@
 <?php
 
 use PilleAoc2021\Command\FetchInputCommand;
+use PilleAoc2021\Command\ListPuzzlesCommand;
 use PilleAoc2021\Command\MakePuzzleCommand;
 use PilleAoc2021\Command\SolvePuzzleCommand;
 use Symfony\Component\Console\Application;
@@ -24,5 +25,6 @@ $application->setVersion("0.1.0");
 $application->add(new SolvePuzzleCommand());
 $application->add(new FetchInputCommand());
 $application->add(new MakePuzzleCommand());
+$application->add(new ListPuzzlesCommand());
 
 $application->run();
