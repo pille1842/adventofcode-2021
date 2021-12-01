@@ -3,8 +3,16 @@
 
 use PilleAoc2021\Command\SolvePuzzleCommand;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Dotenv\Dotenv;
 
 require_once 'vendor/autoload.php';
+
+if (!isset($_ENV['APP_ENV'])) {
+    $_ENV['APP_ENV'] = 'dev';
+}
+
+$dotenv = new Dotenv();
+$dotenv->loadEnv(__DIR__.'/.env');
 
 $application = new Application();
 
