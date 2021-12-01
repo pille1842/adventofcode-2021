@@ -64,6 +64,12 @@ final class MakePuzzleCommand extends AbstractCommand
                 throw new \Exception("Template file $templatePath is unreadable.");
             }
 
+            if (file_exists($outputPath)) {
+                throw new \Exception(
+                    sprintf("Puzzle class %s already defined in %s", $className, realpath($outputPath))
+                );
+            }
+
             $template = file_get_contents($templatePath);
             $template = str_replace('%%CLASS_NAME%%', $className, $template);
             $template = str_replace('%%PUZZLE_NAME%%', $puzzleName, $template);
