@@ -74,4 +74,12 @@ abstract class AbstractCommand extends Command
 
         return file_get_contents($absolutePath);
     }
+
+    protected function formatError(string $message): string
+    {
+        $formatter = $this->getHelper('formatter');
+        $errorMessages = ['', $message, ''];
+
+        return $formatter->formatBlock($errorMessages, 'error');
+    }
 }

@@ -36,7 +36,8 @@ final class SolvePuzzleCommand extends AbstractCommand
             $duration = $afterTime - $beforeTime;
             $output->writeln(sprintf("<info>Total execution time: %fs</info>", $duration));
         } catch (\Exception $e) {
-            $output->writeln("<error>Error: " . $e->getMessage() . "</error>");
+            $formattedError = $this->formatError($e->getMessage());
+            $output->writeln("\n" . $formattedError . "\n");
             return Command::FAILURE;
         }
 
