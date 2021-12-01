@@ -4,21 +4,44 @@ namespace PilleAoc2021\Command;
 
 use PilleAoc2021\Puzzle\PuzzleInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Finder\Finder;
 
 abstract class AbstractCommand extends Command
 {
-    protected array $puzzleClasses = [
-        'example' => \PilleAoc2021\Puzzle\ExamplePuzzle::class,
-    ];
+    protected array $puzzleClasses;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->discoverPuzzleClasses();
+    }
+
+    private function discoverPuzzleClasses(): void
+    {
+        $finder = new Finder();
+        $finder->files()->name('*Puzzle.php')->in(__DIR__ . '/../Puzzle/');
+
+        foreach ($finder as $file) {
+            $ns = 'PilleAoc2021\\Puzzle';
+            if ($relativePath = $file->getRelativePath()) {
+                $ns .= '\\' . strtr($relativePath, '/', '\\');
+            }
+            $class = $ns . '\\' . $file->getBasename('.php');
+
+            $r = new \ReflectionClass($class);
+
+            if ($r->isSubclassOf('PilleAoc2021\\Puzzle\\PuzzleInterface') && !$r->isAbstract()) {
+                $puzzleName = $r->getStaticPropertyValue('puzzleName');
+                $this->puzzleClasses[$puzzleName] = $r->getName();
+            }
+        }
+    }
 
     protected function getPuzzleClassInstance(string $puzzle)
     {
         if (!isset($this->puzzleClasses[$puzzle])) {
             throw new \Exception("Unknown puzzle: $puzzle");
-        }
-
-        if ($this->puzzleClasses[$puzzle] === false) {
-            throw new \Exception("Puzzle not yet implemented: $puzzle");
         }
 
         $instance = new $this->puzzleClasses[$puzzle];

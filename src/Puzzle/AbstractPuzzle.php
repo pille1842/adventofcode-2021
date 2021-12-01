@@ -6,12 +6,12 @@ use Exception;
 
 abstract class AbstractPuzzle implements PuzzleInterface
 {
+    public static string $puzzleName;
     protected string $input;
-    protected string $inputFilename;
 
     public function getInputFilename(): string
     {
-        return $this->inputFilename;
+        return static::$puzzleName . '.txt';
     }
 
     public function setInput(string $input): self

@@ -4,7 +4,7 @@ namespace PilleAoc2021\Puzzle;
 
 final class ExamplePuzzle extends AbstractPuzzle implements PuzzleInterface
 {
-    protected string $inputFilename = 'example.txt';
+    public static string $puzzleName = 'example';
 
     public function solve(): string
     {
