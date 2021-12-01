@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+use PilleAoc2021\Command\FetchInputCommand;
 use PilleAoc2021\Command\SolvePuzzleCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Dotenv\Dotenv;
@@ -20,5 +21,6 @@ $application->setName("Advent of Code 2021");
 $application->setVersion("0.1.0");
 
 $application->add(new SolvePuzzleCommand());
+$application->add(new FetchInputCommand());
 
 $application->run();
