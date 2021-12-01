@@ -25,16 +25,28 @@ directory with your own versions.
 
 ## Running puzzles
 
-All interaction is through the command-line interface. To get a list of available puzzles, run:
+All interaction is through the command-line interface. To get an overview of available commands, run:
 
 ```
 $ php aoc.php
 ```
 
+To list all available puzzles, run:
+
+```
+$ php aoc.php puzzles
+```
+
 To solve a specific puzzle, run:
 
 ```
-$ php aoc.php name-of-puzzle
+$ php aoc.php solve name-of-puzzle
+```
+
+To create a scaffolding puzzle class for a given day and fetch its input file automatically, run:
+
+```
+$ php aoc.php make $DAY
 ```
 
 ## License
