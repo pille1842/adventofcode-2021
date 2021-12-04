@@ -20,12 +20,12 @@ final class Day04Puzzle extends AbstractPuzzle implements PuzzleInterface
         $i = 0;
         $row = 0;
         $board = [];
-        $boardContents = [];
+        $boards = [];
 
         foreach ($lines as $line) {
             if ($line == '') {
                 $row = 0;
-                $boardContents[] = $board;
+                $boards[] = new Board($board);
                 continue;
             }
             $numbers = explode(' ', $line);
@@ -39,13 +39,6 @@ final class Day04Puzzle extends AbstractPuzzle implements PuzzleInterface
             $board[$row] = $numbers;
             $i++;
             $row++;
-        }
-
-        $boards = [];
-
-        foreach ($boardContents as $boardContent) {
-            $board = new Board($boardContent);
-            $boards[] = $board;
         }
 
         $solutionPart1 = $this->findFirstWinner($boards, $draws);
