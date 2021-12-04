@@ -8,19 +8,8 @@ use PilleAoc2021\Command\SolvePuzzleCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Dotenv\Dotenv;
 
-function dump($value)
-{
-    print_r($value);
-    echo "\n";
-}
-
-function dd($value)
-{
-    dump($value);
-    die();
-}
-
 require_once 'vendor/autoload.php';
+require_once 'helpers.php';
 
 if (!isset($_ENV['APP_ENV'])) {
     $_ENV['APP_ENV'] = 'dev';
