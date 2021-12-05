@@ -68,11 +68,11 @@ final class Day05Puzzle extends AbstractPuzzle implements PuzzleInterface
                 $yDir = -1;
             }
 
-            for ($y = $y1; $yDir == 1 ? $y <= $y2 : $y >= $y2; $y+= $yDir) {
+            for ($y = $y1; $yDir == 1 ? $y <= $y2 : $y >= $y2; $y += $yDir) {
                 if (!isset($map[$y])) {
                     $map[$y] = [];
                 }
-                for ($x = $x1; $xDir == 1 ? $x <= $x2 : $x >= $x2; $x+= $xDir) {
+                for ($x = $x1; $xDir == 1 ? $x <= $x2 : $x >= $x2; $x += $xDir) {
                     if ($x1 == $x2 ||
                         $y1 == $y2 ||
                         ($y1 - $y2) * $x + ($x2 - $x1) * $y + ($x1 * $y2 - $x2 * $y1) == 0) {
