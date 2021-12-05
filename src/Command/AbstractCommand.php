@@ -53,16 +53,20 @@ abstract class AbstractCommand extends Command
         return $instance;
     }
 
-    protected static function getInput($puzzle): string
+    protected static function getInput($puzzle, string $input = null): string
     {
-        $inputFilename = $puzzle->getInputFilename();
-        $absolutePath = implode(DIRECTORY_SEPARATOR, [
-            dirname(__FILE__),
-            '..',
-            '..',
-            'input',
-            $inputFilename
-        ]);
+        if ($input === null) {
+            $inputFilename = $puzzle->getInputFilename();
+            $absolutePath = implode(DIRECTORY_SEPARATOR, [
+                dirname(__FILE__),
+                '..',
+                '..',
+                'input',
+                $inputFilename
+            ]);
+        } else {
+            $absolutePath = $input;
+        }
 
         if (!file_exists($absolutePath)) {
             throw new \Exception("File does not exist: $absolutePath");

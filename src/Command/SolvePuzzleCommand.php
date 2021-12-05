@@ -17,6 +17,7 @@ final class SolvePuzzleCommand extends AbstractCommand
         $this
             ->setHelp('Solve the given puzzle and print the solution to stdout')
             ->addArgument('puzzle', InputArgument::REQUIRED, 'Puzzle to solve')
+            ->addArgument('input', InputArgument::OPTIONAL, 'Input file to use')
         ;
     }
 
@@ -26,7 +27,7 @@ final class SolvePuzzleCommand extends AbstractCommand
             $beforeTime = microtime(true);
 
             $puzzle = $this->getPuzzleClassInstance($input->getArgument('puzzle'));
-            $input = self::getInput($puzzle);
+            $input = self::getInput($puzzle, $input->getArgument('input'));
             $puzzle->setInput($input);
             $solution = $puzzle->solve();
 
