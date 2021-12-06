@@ -1,0 +1,25 @@
+<?php declare(strict_types=1);
+
+namespace PilleAoc2021Tests;
+
+use PHPUnit\Framework\TestCase;
+use PilleAoc2021\Puzzle\%%CLASS_NAME%%;
+
+final class %%CLASS_NAME%%Test extends TestCase
+{
+    public function testCanBeCreated(): void
+    {
+        $this->assertInstanceOf(%%CLASS_NAME%%::class, new %%CLASS_NAME%%());
+    }
+
+    public function testSolvesExampleInput(): void
+    {
+        $puzzle = new %%CLASS_NAME%%();
+        $puzzle->setInput("Paste the example input here");
+
+        $this->assertEquals(
+            "Put the expected solution here",
+            $puzzle->solve()
+        );
+    }
+}
