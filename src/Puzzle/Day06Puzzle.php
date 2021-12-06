@@ -12,8 +12,7 @@ final class Day06Puzzle extends AbstractPuzzle implements PuzzleInterface
             return (int) $val;
         }, explode(',', $this->input));
 
-        $skeleton = array_fill(0, 9, 0);
-        $fish = array_replace($skeleton, array_count_values($input));
+        $fish = array_replace(array_fill(0, 9, 0), array_count_values($input));
 
         $solutionPart1 = 0;
 
@@ -29,11 +28,10 @@ final class Day06Puzzle extends AbstractPuzzle implements PuzzleInterface
             }
         }
 
-        $fish['spawn'] = 0;
-        $solutionPart2 = array_sum($fish);
+        $solutionPart2 = array_sum($fish) - $fish['spawn'];
 
         return sprintf(
-            "# of fish after  80 generations: %d\n# of fish after 256 generations: %d",
+            "# of fish after  80 days: %d\n# of fish after 256 days: %d",
             $solutionPart1,
             $solutionPart2
         );
