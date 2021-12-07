@@ -12,8 +12,8 @@ final class Day07Puzzle extends AbstractPuzzle implements PuzzleInterface
             return (int) $val;
         }, explode(',', $this->input));
 
-        [$position1, $fuel1] = $this->solvePart1($input);
-        [$position2, $fuel2] = $this->solvePart2($input);
+        [$position1, $fuel1] = $this->calculate($input);
+        [$position2, $fuel2] = $this->calculate($input, true);
 
         return sprintf(
             "Part 1: Most fuel-efficient position: %d (fuel expended: %d)\n" .
@@ -25,29 +25,7 @@ final class Day07Puzzle extends AbstractPuzzle implements PuzzleInterface
         );
     }
 
-    private function solvePart1(array $crabs): array
-    {
-        $possiblePositions = range(0, max($crabs));
-        $minimumFuel = false;
-        $leastExpensivePosition = false;
-
-        foreach ($possiblePositions as $position) {
-            $fuelExpended = 0;
-
-            foreach ($crabs as $crab) {
-                $fuelExpended += abs($position - $crab);
-            }
-
-            if ($leastExpensivePosition === false || $fuelExpended < $minimumFuel) {
-                $leastExpensivePosition = $position;
-                $minimumFuel = $fuelExpended;
-            }
-        }
-
-        return [$leastExpensivePosition, $minimumFuel];
-    }
-
-    private function solvePart2(array $crabs): array
+    private function calculate(array $crabs, bool $fuelIsExpensive = false): array
     {
         $possiblePositions = range(0, max($crabs));
         $minimumFuel = false;
@@ -58,7 +36,7 @@ final class Day07Puzzle extends AbstractPuzzle implements PuzzleInterface
 
             foreach ($crabs as $crab) {
                 $diff = abs($position - $crab);
-                $fuelExpended += ($diff * ($diff + 1)) / 2;
+                $fuelExpended += $fuelIsExpensive ? ($diff * ($diff + 1)) / 2 : $diff;
             }
 
             if ($leastExpensivePosition === false || $fuelExpended < $minimumFuel) {
