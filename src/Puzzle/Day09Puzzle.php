@@ -47,7 +47,7 @@ final class Day09Puzzle extends AbstractPuzzle implements PuzzleInterface
         // Assigning each point to a basin:
         //   - Create a new matrix and initialize all cells with -1 (unmarked).
         //   - Now iterate over the cells from lowest to highest altitude.
-        //   - If the current cell is and unmarked, mark it with a new unique ID.
+        //   - If the current cell is unmarked, mark it with a new unique ID.
         //   - Mark all its unmarked neighbors with the same ID.
         //   - Finally, count how many times each unique ID occurs in the matrix (omitting all cells with value 9).
         ksort($pointsByAltitude);
